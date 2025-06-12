@@ -1,5 +1,5 @@
 
-# 📄 Player Tracking Project Report
+#  Player Tracking Project Report
 
 ---
 
@@ -13,21 +13,21 @@ I used the **YOLOv8** object detection model combined with the **DeepSORT** trac
 
 ---
 
-## 🧪 2. Techniques Tried and Their Outcomes
+##  2. Techniques Tried and Their Outcomes
 
-### ✅ YOLOv8 Detection:
+###  YOLOv8 Detection:
 - Worked well for detecting players frame-by-frame.
 - Accurate bounding boxes and confidence scores.
 - Fast and efficient.
 
-### ✅ DeepSORT Tracking:
+###  DeepSORT Tracking:
 - Maintained player identities even when players left and re-entered the frame.
 - Smooth ID assignment and re-identification.
 - Occasional ID switches during occlusions or fast movement, but generally reliable.
 
 ---
 
-## ⚠️ 3. Challenges Encountered
+## ⚠ 3. Challenges Encountered
 
 - **Class ID Assumption**: The code assumes that players are class ID `2`. If the model uses a different class mapping, the detections fail.
 - **Model Quality**: Accuracy depends on how well `best.pt` was trained.
@@ -36,7 +36,7 @@ I used the **YOLOv8** object detection model combined with the **DeepSORT** trac
 
 ---
 
-## ⏳ 4. What Remains & Future Steps
+##  4. What Remains & Future Steps
 
 If more time or resources were available, I would:
 
