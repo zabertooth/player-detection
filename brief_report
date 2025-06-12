@@ -1,0 +1,50 @@
+
+# 📄 Player Tracking Project Report
+
+---
+
+## 🔍 1. Approach and Methodology
+
+I used the **YOLOv8** object detection model combined with the **DeepSORT** tracker to identify and re-identify players in a 15-second video. The process involved:
+
+- Loading a trained YOLO model (`best.pt`) to detect players.
+- Using DeepSORT to track player movements and assign consistent IDs across frames.
+- Saving the results in an output video with bounding boxes and player IDs overlaid.
+
+---
+
+## 🧪 2. Techniques Tried and Their Outcomes
+
+### ✅ YOLOv8 Detection:
+- Worked well for detecting players frame-by-frame.
+- Accurate bounding boxes and confidence scores.
+- Fast and efficient.
+
+### ✅ DeepSORT Tracking:
+- Maintained player identities even when players left and re-entered the frame.
+- Smooth ID assignment and re-identification.
+- Occasional ID switches during occlusions or fast movement, but generally reliable.
+
+---
+
+## ⚠️ 3. Challenges Encountered
+
+- **Class ID Assumption**: The code assumes that players are class ID `2`. If the model uses a different class mapping, the detections fail.
+- **Model Quality**: Accuracy depends on how well `best.pt` was trained.
+- **Occlusion Handling**: When players overlap or move too fast, DeepSORT may lose track or assign a new ID.
+- **Frame Rate Sensitivity**: On low FPS or blurry video, tracking performance drops.
+
+---
+
+## ⏳ 4. What Remains & Future Steps
+
+If more time or resources were available, I would:
+
+- Train a more robust YOLO model with better data to handle edge cases (e.g., occlusion, motion blur).
+- Integrate appearance embeddings to improve re-identification.
+- Evaluate with metrics like IDF1, MOTA, etc.
+- Optimize for real-time performance with GPU acceleration.
+- Create a GUI or web interface for easy input and output management.
+
+---
+
