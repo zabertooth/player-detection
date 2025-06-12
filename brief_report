@@ -3,48 +3,56 @@
 
 ---
 
-## 🔍 1. Approach and Methodology
+  1. Approach and Methodology
 
-I used the **YOLOv8** object detection model combined with the **DeepSORT** tracker to identify and re-identify players in a 15-second video. The process involved:
+I used the YOLOv8 object detection model along with the DeepSORT tracker to detect, track, and re-identify players in a 15-second video. The goal was to ensure each player maintains a consistent ID, even if they temporarily leave the frame.
 
-- Loading a trained YOLO model (`best.pt`) to detect players.
-- Using DeepSORT to track player movements and assign consistent IDs across frames.
-- Saving the results in an output video with bounding boxes and player IDs overlaid.
 
----
+•⁠  ⁠Loading a trained YOLO model (⁠ best.pt ⁠) to detect players.
+•⁠  ⁠Using DeepSORT to track player movements and assign consistent IDs across frames.
+•⁠  ⁠Saving the results in an output video with bounding boxes and player IDs overlaid.
 
-##  2. Techniques Tried and Their Outcomes
+The steps followed were:
+	•	Model Setup: Loaded a custom-trained YOLOv8 model (best.pt) optimized to detect players. YOLOv8 processes each frame and returns bounding boxes, class IDs, and confidence scores for each detected object.
+	•	Filtering Detections: Extracted only the bounding boxes where the detected class ID matched that of a player (assumed to be class ID 2).
+	•	Tracking with DeepSORT: Passed the filtered detections into the DeepSORT tracker. DeepSORT assigns unique IDs to players and uses both motion and appearance information to maintain identity across frames.
+	•	Visual Output: For each frame, the script draws bounding boxes and the assigned player IDs. It saves this annotated output to a new video file (tracked_output.avi) and displays it live.
 
-###  YOLOv8 Detection:
-- Worked well for detecting players frame-by-frame.
-- Accurate bounding boxes and confidence scores.
-- Fast and efficient.
-
-###  DeepSORT Tracking:
-- Maintained player identities even when players left and re-entered the frame.
-- Smooth ID assignment and re-identification.
-- Occasional ID switches during occlusions or fast movement, but generally reliable.
 
 ---
 
-## ⚠ 3. Challenges Encountered
+  2. Techniques Tried and Their Outcomes
 
-- **Class ID Assumption**: The code assumes that players are class ID `2`. If the model uses a different class mapping, the detections fail.
-- **Model Quality**: Accuracy depends on how well `best.pt` was trained.
-- **Occlusion Handling**: When players overlap or move too fast, DeepSORT may lose track or assign a new ID.
-- **Frame Rate Sensitivity**: On low FPS or blurry video, tracking performance drops.
+#  YOLOv8 Detection:
+•⁠  ⁠Worked well for detecting players frame-by-frame.
+•⁠  ⁠Accurate bounding boxes and confidence scores.
+•⁠  ⁠Fast and efficient.
+
+#  DeepSORT Tracking:
+•⁠  ⁠Maintained player identities even when players left and re-entered the frame.
+•⁠  ⁠Smooth ID assignment and re-identification.
+•⁠  ⁠Occasional ID switches during occlusions or fast movement, but generally reliable.
 
 ---
 
-##  4. What Remains & Future Steps
+  3. Challenges Encountered
+
+•⁠  ⁠*Class ID Assumption*: The code assumes that players are class ID ⁠ 2 ⁠. If the model uses a different class mapping, the detections fail.
+•⁠  ⁠*Model Quality*: Accuracy depends on how well ⁠ best.pt ⁠ was trained.
+•⁠  ⁠*Occlusion Handling*: When players overlap or move too fast, DeepSORT may lose track or assign a new ID.
+•⁠  ⁠*Frame Rate Sensitivity*: On low FPS or blurry video, tracking performance drops.
+
+---
+
+  4. Future Steps
 
 If more time or resources were available, I would:
 
-- Train a more robust YOLO model with better data to handle edge cases (e.g., occlusion, motion blur).
-- Integrate appearance embeddings to improve re-identification.
-- Evaluate with metrics like IDF1, MOTA, etc.
-- Optimize for real-time performance with GPU acceleration.
-- Create a GUI or web interface for easy input and output management.
+•⁠  ⁠Train a more robust YOLO model with better data to handle edge cases (e.g., occlusion, motion blur).
+•⁠  ⁠Integrate appearance embeddings to improve re-identification.
+•⁠  ⁠Evaluate with metrics like IDF1, MOTA, etc.
+•⁠  ⁠Optimize for real-time performance with GPU acceleration.
+•⁠  ⁠Create a GUI or web interface for easy input and output management.
 
 ---
 
